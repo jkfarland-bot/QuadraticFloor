@@ -229,6 +229,18 @@ theorem window' (hp2 : p ≠ 2) {A : ℕ} (hA : Odd A) (hpA : ¬ p ∣ A) {B C :
     mul_sum, mul_sum, mul_sum]
   exact sum_congr rfl fun j _ => by ring
 
+/-- **Lemma 2.3 (window form)**, stated with the discriminant `D = B² - 4AC` of the admissible
+pair. -/
+theorem window_form' (hp2 : p ≠ 2) {A : ℕ} (hA : Odd A) (hpA : ¬ p ∣ A) {B C : ℤ}
+    (hBC : Admissible A B C) :
+    floorSum A B C p - (C.negOnePow : ℤ) =
+      2 * ∑ x ∈ (Icc 1 (4 * A * p)).filter (fun x => x % (8 * A) = (B ^ 2 - 4 * A * C).toNat),
+        eta p x := by
+  obtain ⟨d, hdD, -, hd4A, -, hd8⟩ := admissible_data hA hBC
+  have : (B ^ 2 - 4 * A * C).toNat = d := by omega
+  rw [this]
+  exact window' hp2 hA hpA hBC hdD hd4A hd8
+
 /-! ### Vanishing of the periodic and even terms -/
 
 variable {A : ℕ}
@@ -238,7 +250,7 @@ lemma sum_eta_psi_c8 (hp2 : p ≠ 2) (hA : Odd A) (hpA : ¬ p ∣ A) (ψ : Diric
     (c : ZMod 8 → ℂ) (hc : ∀ y, c (y + 4) = -c y) :
     ∑ x ∈ Icc 1 (4 * A * p), (eta p x : ℂ) * ψ (x : ZMod A) * c (x : ZMod 8) = 0 := by
   have hAp : Odd (A * p) := hA.mul (odd_of_ne_two hp2)
-  apply half_sum_zero_of_periodic _ (h := 4 * A * p)
+  apply half_sum_zero_of_periodic' _ (h := 4 * A * p)
   · intro x
     rw [eta_add_half hp2 hA, cast8_add_half hAp,
       cast_add_of_dvd x _ A ⟨4 * p, by ring⟩, hc]
@@ -260,7 +272,7 @@ lemma sum_eta_psi_even (hp2 : p ≠ 2) (hA : Odd A) (ψ : DirichletCharacter ℂ
     (s : ℂ) (hcper : ∀ x, c (x + 4 * A * p) = c x)
     (hcref : ∀ x ≤ 8 * A * p, c (8 * A * p - x) = s * c x) (hs : s * ψ (-1) = -1) :
     ∑ x ∈ Icc 1 (4 * A * p), (eta p x : ℂ) * ψ (x : ZMod A) * c x = 0 := by
-  apply half_sum_zero_of_even _ (h := 4 * A * p)
+  apply half_sum_zero_of_even' _ (h := 4 * A * p)
   · intro x
     rw [eta_add_half hp2 hA, cast_add_of_dvd x _ A ⟨4 * p, by ring⟩, hcper]
     push_cast; ring
@@ -398,7 +410,7 @@ theorem square_class_decomposition' (hp2 : p ≠ 2) [NeZero A] (hA : Odd A) (hpA
     apply sum_congr rfl
     intro ψ _
     rw [← mul_sum, sum_window_char hp2 hA hpA ψ, show 8 * A * p = 2 * (4 * A * p) by ring,
-      bern_antiperiodic _ hh (vartheta_add_half hp2 hA ψ)]
+      bern_antiperiodic' _ hh (vartheta_add_half hp2 hA ψ)]
     ring
   have hwinC : (floorSum A B C p : ℂ) - ((C.negOnePow : ℤ) : ℂ) =
       2 * ∑ x ∈ (Icc 1 (4 * A * p)).filter (fun x => x % (8 * A) = d), (eta p x : ℂ) := by

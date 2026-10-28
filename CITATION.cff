@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "QuadraticFloor: a Lean 4 formalization of quadratic floor sums and the trace of a quartic Bernoulli number"
+authors:
+  - family-names: Farland
+    given-names: Joseph S.
+version: v1.0
+license: Apache-2.0
+repository-code: "https://github.com/jkfarland-bot/QuadraticFloor"
+keywords:
+  - floor sums
+  - Legendre symbol
+  - generalized Bernoulli numbers
+  - quartic characters
+  - class numbers
+  - Lean 4
+  - Mathlib
+  - formal verification

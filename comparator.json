@@ -1,0 +1,45 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "QuadraticFloor.root_count",
+    "QuadraticFloor.eta_eq",
+    "QuadraticFloor.window_form",
+    "QuadraticFloor.half_sum_zero_of_periodic",
+    "QuadraticFloor.half_sum_zero_of_even",
+    "QuadraticFloor.bern_antiperiodic",
+    "QuadraticFloor.square_class_decomposition",
+    "QuadraticFloor.floorSum_universal",
+    "QuadraticFloor.floorSum_eq_of_sq_modEq",
+    "QuadraticFloor.exists_admissible",
+    "QuadraticFloor.floorSum_one",
+    "QuadraticFloor.floorSum_three",
+    "QuadraticFloor.quadratic_half",
+    "QuadraticFloor.quartic_split",
+    "QuadraticFloor.quartic_mod_four",
+    "QuadraticFloor.monic_odd",
+    "QuadraticFloor.monic_even",
+    "QuadraticFloor.monic_even_bound",
+    "QuadraticFloor.monic_even_eventually_const"
+  ],
+  "definition_names": [
+    "QuadraticFloor.floorSum",
+    "QuadraticFloor.Admissible",
+    "QuadraticFloor.eta",
+    "QuadraticFloor.bern",
+    "QuadraticFloor.vartheta",
+    "QuadraticFloor.lg5",
+    "QuadraticFloor.xiFun",
+    "QuadraticFloor.xi",
+    "QuadraticFloor.Theta",
+    "QuadraticFloor.zB",
+    "QuadraticFloor.osum",
+    "QuadraticFloor.kap"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

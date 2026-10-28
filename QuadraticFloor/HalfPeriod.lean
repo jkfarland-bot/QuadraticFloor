@@ -26,7 +26,7 @@ lemma sum_Icc_one {M : Type*} [AddCommMonoid M] (f : ℕ → M) (n : ℕ) :
   simp [add_comm]
 
 /-- Lemma 3.1(3). -/
-lemma bern_antiperiodic (f : ℕ → ℂ) {h : ℕ} (hh : 0 < h) (hf : ∀ x, f (x + h) = -f x) :
+lemma bern_antiperiodic' (f : ℕ → ℂ) {h : ℕ} (hh : 0 < h) (hf : ∀ x, f (x + h) = -f x) :
     bern (2 * h) f = -(1 / 2) * ∑ x ∈ Icc 1 h, f x := by
   unfold bern
   rw [sum_Icc_one, sum_Icc_one, two_mul, sum_range_add]
@@ -42,7 +42,7 @@ lemma bern_antiperiodic (f : ℕ → ℂ) {h : ℕ} (hh : 0 < h) (hf : ∀ x, f 
   ring
 
 /-- Lemma 3.1(1). -/
-lemma half_sum_zero_of_periodic (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + h) = f x)
+lemma half_sum_zero_of_periodic' (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + h) = f x)
     (hfull : ∑ x ∈ Icc 1 (2 * h), f x = 0) : ∑ x ∈ Icc 1 h, f x = 0 := by
   rw [sum_Icc_one, two_mul, sum_range_add] at hfull
   rw [sum_Icc_one]
@@ -53,7 +53,7 @@ lemma half_sum_zero_of_periodic (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + 
   simpa using h2
 
 /-- Lemma 3.1(2). -/
-lemma half_sum_zero_of_even (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + h) = -f x) (h0 : f 0 = 0)
+lemma half_sum_zero_of_even' (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + h) = -f x) (h0 : f 0 = 0)
     (hrefl : ∀ x ≤ 2 * h, f (2 * h - x) = f x) : ∑ x ∈ Icc 1 h, f x = 0 := by
   rw [sum_Icc_one]
   set T := ∑ k ∈ range h, f (k + 1)
