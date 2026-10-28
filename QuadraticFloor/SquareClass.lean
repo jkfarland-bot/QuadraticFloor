@@ -331,7 +331,7 @@ lemma sum_window_char (hp2 : p ≠ 2) (hA : Odd A) (hpA : ¬ p ∣ A) (ψ : Diri
     intro x _
     unfold vartheta
     have : ψ (-1) ≠ -1 := by rw [hψ]; norm_num
-    rw [if_neg this, mul_one, eta_mul_chi4_sq]
+    rw [ite_of_neg this, mul_one, eta_mul_chi4_sq]
   · -- `ψ` odd: the term with `1` vanishes
     have h1 := sum_eta_psi_even hp2 hA ψ (fun _ => (1 : ℂ)) 1
       (fun x => rfl) (fun x _ => by rw [one_mul]) (by rw [hψ]; ring)
@@ -340,7 +340,7 @@ lemma sum_window_char (hp2 : p ≠ 2) (hA : Odd A) (hpA : ¬ p ∣ A) (ψ : Diri
     apply sum_congr rfl
     intro x _
     unfold vartheta
-    rw [if_pos hψ]
+    rw [ite_of_pos hψ]
     ring
 
 /-- `ϑ_{p,ψ}` changes sign under `x ↦ x + 4Ap`. -/

@@ -117,7 +117,7 @@ theorem floorSum_one' (hp2 : p ≠ 2) :
   unfold vartheta
   have h1 : (1 : DirichletCharacter ℂ 1) (-1) ≠ -1 := by
     rw [Subsingleton.elim (-1 : ZMod 1) 1, map_one]; norm_num
-  rw [if_neg h1, Subsingleton.elim (x : ZMod 1) 1, map_one, mul_one, eta_mul_chi4_sq]
+  rw [ite_of_neg h1, Subsingleton.elim (x : ZMod 1) 1, map_one, mul_one, eta_mul_chi4_sq]
 
 /-! ### The coefficient three -/
 
@@ -183,18 +183,18 @@ theorem floorSum_three' (hp2 : p ≠ 2) (hp3 : p ≠ 3) :
     unfold vartheta
     have h1 : (1 : DirichletCharacter ℂ 3) (-1) ≠ -1 := by
       rw [MulChar.one_apply (IsUnit.neg isUnit_one)]; norm_num
-    rw [if_neg h1, eta_mul_chi4_sq]
+    rw [ite_of_neg h1, eta_mul_chi4_sq]
     congr 1
     by_cases h3 : 3 ∣ x
-    · rw [if_pos h3, MulChar.map_nonunit]
+    · rw [ite_of_pos h3, MulChar.map_nonunit]
       rw [(ZMod.natCast_eq_zero_iff x 3).2 h3]; exact not_isUnit_zero
-    · rw [if_neg h3, MulChar.one_apply]
+    · rw [ite_of_neg h3, MulChar.one_apply]
       rw [ZMod.isUnit_iff_coprime]
       exact (Nat.coprime_comm.1 ((Nat.Prime.coprime_iff_not_dvd Nat.prime_three).2 h3))
   · congr 1
     funext x
     unfold vartheta
     have h1 : chi3 (-1) = -1 := by rw [show (-1 : ZMod 3) = 2 by decide, chi3_two]
-    rw [if_pos h1, chi3_apply]
+    rw [ite_of_pos h1, chi3_apply]
 
 end QuadraticFloor

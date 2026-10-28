@@ -82,6 +82,8 @@ lemma univ_char5 :
 
 lemma I_ne_one : Complex.I ≠ 1 := by intro h; simpa using congrArg Complex.im h
 
+set_option linter.unnecessarySeqFocus false in
+set_option linter.unusedTactic false in
 lemma sum_char5 {M : Type*} [AddCommMonoid M] (F : DirichletCharacter ℂ 5 → M) :
     ∑ ψ, F ψ = F 1 + F xi + F (xi * xi) + F (star xi) := by
   have hv : ∀ ψ ψ' : DirichletCharacter ℂ 5, ψ 2 ≠ ψ' 2 → ψ ≠ ψ' := fun ψ ψ' h e => h (e ▸ rfl)
@@ -122,26 +124,28 @@ lemma bern_conj (q : ℕ) (f : ℕ → ℂ) :
 
 variable {p : ℕ} [hp : Fact p.Prime]
 
+omit hp in
 lemma vartheta_xi : vartheta p xi = Theta p := by
   funext x
   unfold vartheta Theta
   have : xi (-1) = -1 := by rw [show (-1 : ZMod 5) = 4 by decide, xi_four]
-  rw [if_pos this]
+  rw [ite_of_pos this]
 
+omit hp in
 lemma vartheta_starxi : vartheta p (star xi) = fun x => starRingEnd ℂ (Theta p x) := by
   funext x
   unfold vartheta Theta
   have : (star xi) (-1) = -1 := by
     rw [MulChar.star_apply, show (-1 : ZMod 5) = 4 by decide, xi_four]; simp
-  rw [if_pos this, MulChar.star_apply, map_mul, map_mul, map_intCast, map_intCast,
+  rw [ite_of_pos this, MulChar.star_apply, map_mul, map_mul, map_intCast, map_intCast,
     starRingEnd_apply]
 
 lemma one_apply_nat (x : ℕ) :
     (1 : DirichletCharacter ℂ 5) (x : ZMod 5) = if 5 ∣ x then 0 else 1 := by
   by_cases h5 : 5 ∣ x
-  · rw [if_pos h5, MulChar.map_nonunit, ]
+  · rw [ite_of_pos h5, MulChar.map_nonunit, ]
     rw [(ZMod.natCast_eq_zero_iff x 5).2 h5]; exact not_isUnit_zero
-  · rw [if_neg h5, MulChar.one_apply]
+  · rw [ite_of_neg h5, MulChar.one_apply]
     rw [ZMod.isUnit_iff_coprime]
     exact Nat.coprime_comm.1 ((Nat.Prime.coprime_iff_not_dvd (by norm_num)).2 h5)
 
@@ -157,20 +161,22 @@ lemma xi_sq_nat (x : ℕ) : (xi (x : ZMod 5)) ^ 2 = (jacobiSym x 5 : ℂ) := by
   · rw [Nat.cast_ofNat, xi_three, neg_sq, Complex.I_sq]; norm_num
   · rw [Nat.cast_ofNat, xi_four]; norm_num
 
+omit hp in
 lemma vartheta_one : vartheta p (1 : DirichletCharacter ℂ 5) =
     fun x => (eta p x : ℂ) * (if 5 ∣ x then 0 else 1) := by
   funext x
   unfold vartheta
   have h1 : (1 : DirichletCharacter ℂ 5) (-1) ≠ -1 := by
     rw [MulChar.one_apply (IsUnit.neg isUnit_one)]; norm_num
-  rw [if_neg h1, eta_mul_chi4_sq, one_apply_nat]
+  rw [ite_of_neg h1, eta_mul_chi4_sq, one_apply_nat]
 
+omit hp in
 lemma vartheta_xixi : vartheta p (xi * xi) = fun x => (eta p x : ℂ) * (jacobiSym x 5 : ℂ) := by
   funext x
   unfold vartheta
   have h1 : (xi * xi) (-1) ≠ -1 := by
     rw [MulChar.mul_apply, show (-1 : ZMod 5) = 4 by decide, xi_four]; norm_num
-  rw [if_neg h1, eta_mul_chi4_sq, MulChar.mul_apply, ← pow_two, xi_sq_nat]
+  rw [ite_of_neg h1, eta_mul_chi4_sq, MulChar.mul_apply, ← pow_two, xi_sq_nat]
 
 /-! ### Theorem 4.4 and Corollary 4.5 -/
 
@@ -232,6 +238,8 @@ theorem quadratic_half' (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
 
 /-! ### Proposition 4.6 -/
 
+set_option linter.unnecessarySeqFocus false in
+set_option linter.unusedTactic false in
 /-- A sum of values in `{-1, 0, 1}` has the parity of the number of nonzero terms. -/
 lemma sum_modEq_card {s : Finset ℕ} {f : ℕ → ℤ} (hf : ∀ j ∈ s, f j = 0 ∨ f j = 1 ∨ f j = -1) :
     ∑ j ∈ s, f j ≡ (s.filter fun j => f j ≠ 0).card [ZMOD 2] := by

@@ -29,6 +29,12 @@ namespace QuadraticFloor
 
 open Finset
 
+theorem ite_of_pos {α : Sort*} {c : Prop} [Decidable c] (h : c) (a b : α) :
+    (if c then a else b) = a := by simp [h]
+
+theorem ite_of_neg {α : Sort*} {c : Prop} [Decidable c] (h : ¬ c) (a b : α) :
+    (if c then a else b) = b := by simp [h]
+
 /-- **The quadratic floor sum** `𝒮_{A,B,C}(p) = ∑_{n=0}^{p-1} (-1)^{⌊(A n² + B n + C)/p⌋}`.
 Integer division `/` by the positive integer `p` rounds down. -/
 def floorSum (A B C : ℤ) (p : ℕ) : ℤ :=
