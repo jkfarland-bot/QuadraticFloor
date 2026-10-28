@@ -7,7 +7,7 @@ public import QuadraticFloor.RootCount
 /-!
 # The character `η_p = χ_{-8p}`
 
-For odd `x`, quadratic reciprocity gives `η_p(x) = κ_p(x) (x/p)` (equation (2.2)), where `κ_p` is the
+For odd `x`, quadratic reciprocity gives `η_p(x) = κ_p(x) (x/p)` (equation (8) of Section 2), where `κ_p` is the
 component of `η_p` modulo `8`: `κ_p = χ_{-8}` (Mathlib's `χ₈'`) if `p ≡ 1 (mod 4)` and `κ_p = χ_8`
 if `p ≡ 3 (mod 4)`. From this: `η_p` vanishes on even numbers and on multiples of `p`, changes sign
 under `x ↦ x + 4Ap` (`A` odd), and is odd: `η_p(q - x) = -η_p(x)` when `8p ∣ q`.
@@ -45,7 +45,7 @@ lemma kap_neg_one_mul_legendre (hp2 : p ≠ 2) : kap p (-1) * legendreSym p (-1)
   · simp only [h, ite_true, show p % 2 ≠ 0 by omega, ite_false]; decide
   · simp only [h, show (3 : ℕ) ≠ 1 by decide, ite_false, show p % 2 ≠ 0 by omega]; decide
 
-/-- **Equation (2.2)**: `η_p(x) = κ_p(x) (x/p)`. -/
+/-- **Equation (8) of Section 2**: `η_p(x) = κ_p(x) (x/p)`. -/
 theorem eta_eq' (hp2 : p ≠ 2) (x : ℕ) : eta p x = kap p x * legendreSym p x := by
   have hpodd := odd_of_ne_two hp2
   unfold eta

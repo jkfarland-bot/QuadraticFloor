@@ -25,7 +25,7 @@ The main results are:
   `𝒮_{1,1,0}(p) = 1 - B_{1,η_p}^{(8p)}`, which is `1 + h(-8p)` by Dirichlet's formula.
 - **Monic shifts (Theorem 7.1).** For odd `a` the sum `𝒮_{1,a,b}(p)` is `𝒮_{1,1,0}(p) - 1` plus an
   explicit oriented sum of Legendre symbols; for even `a` it is an explicit finite expression,
-  bounded by `1 + 2|a/2|` and eventually constant in `p`.
+  bounded by `1 + |a|` and eventually constant in `p`.
 
 Toolchain: `leanprover/lean4:v4.35.0`, Mathlib `v4.35.0`.
 
@@ -50,8 +50,14 @@ No `sorry`, no `native_decide`. Every result depends only on `propext`, `Classic
   `χ_{-4}^0` is taken as `χ_{-4}²`, the principal character modulo 4. In the cases `A = 3` and
   `A = 5` the characters are written as explicit functions: `η_p` times the indicator of numbers
   prime to 3 (or 5), `η_p χ_{-4} (·/3)` for `χ_{-24p}`, and `η_p (·/5)` for `χ_{-40p}`.
+- **Lemma 3.1** is proved for arbitrary functions on the natural numbers. In part (1) the vanishing
+  of the full sum, which the paper gets from the character being nonprincipal, is a hypothesis, so
+  that part is immediate from periodicity; in part (2) the evenness of the character and
+  `ϑ(0) = 0` are hypotheses.
 - **Theorem 4.4** is formalized as its two linear combinations: the difference of the cases
-  `B = 1, 3` (Corollary 4.5) and their sum (`quadratic_half`).
+  `B = 1, 3` (equation (23) of Corollary 4.5) and their sum (`quadratic_half`). Its assertions that
+  `Θ_p` is primitive of order 4 and conductor `40p`, and the class-number equations (24) and (25)
+  of Corollary 4.5, are not formalized. `Re B_{1,Θ_p}` does not depend on the choice `ξ(2) = i`.
 - **Proposition 4.6.** `z_B` records whether some `0 ≤ j ≤ (p-1)/2` has `p ∣ B² + 40 j`, which is
   equivalent to the paper's description through the unique solution `j_B`.
 - **Theorem 7.1.** The odd case is stated with `𝒮_{1,1,0}(p) - 1` in place of `h(-8p)`.
@@ -71,7 +77,10 @@ Hudson and Williams (1982) and of Godin and Williams (2005). The mechanism of Th
 coset averaging of Szmidt, Urbanowicz and Zagier (1995) together with character orthogonality.
 The author found neither the floor-sum form of these identities nor the quartic split in the
 sources searched (the Dirichlet-type literature, Berndt's survey, and Chamberland and Dilcher's
-floor-sum papers). Novelty is claimed only relative to that search.
+floor-sum papers, arXiv:2510.04387 and J. Integer Seq. 29 (2026), Article 26.2.1). Novelty is
+claimed only relative to that search, made in 2026. One overlap is known: the case `a = b = 0` of
+Theorem 7.1(2), `𝒮_{1,0,0}(p) = 1`, is equivalent for prime `n = p` to the count of `k ≤ n` with
+`⌈k²/n⌉` odd in Chamberland and Dilcher's alternating-sum paper.
 
 ## Authorship, AI assistance and licence
 
@@ -100,7 +109,7 @@ ruby scripts/validate-formalization.rb
 | Paper | Challenge declaration |
 |---|---|
 | Lemma 2.1 (root count) | `root_count` |
-| Equation (2.2) | `eta_eq` |
+| Equation (8) of Section 2 | `eta_eq` |
 | Lemma 2.3 (window form) | `window_form` |
 | Lemma 3.1 | `half_sum_zero_of_periodic`, `half_sum_zero_of_even`, `bern_antiperiodic` |
 | **Theorem 3.2 (square-class decomposition)** | `square_class_decomposition` |
@@ -119,7 +128,7 @@ ruby scripts/validate-formalization.rb
 |---|---|
 | `Defs.lean` | `floorSum`, `Admissible`, `eta`, `bern`, `vartheta`, `xi`, `Theta`, `zB`, `osum` |
 | `RootCount.lean` | the parity of the quotient, counting roots of a quadratic, Lemma 2.1 |
-| `Eta.lean` | `κ_p`, equation (2.2), and the symmetries of `η_p` |
+| `Eta.lean` | `κ_p`, equation (8), and the symmetries of `η_p` |
 | `HalfPeriod.lean` | Lemma 3.1 and the vanishing of periodic Legendre-weighted sums |
 | `SquareClass.lean` | the window form, orthogonality modulo `A` and `8`, Theorem 3.2 |
 | `Corollaries.lean` | Corollaries 3.3 and 3.4, Theorems 4.1 and 4.2 |

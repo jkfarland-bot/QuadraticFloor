@@ -16,7 +16,7 @@ project:
     quadratic characters (which are class numbers by Dirichlet's formula, not formalized). At A = 5
     the difference S_{5,3,0}(p) - S_{5,1,0}(p) is the real part of the first Bernoulli number of the
     quartic character Theta_p = eta_p chi_{-4} xi of conductor 40p, with xi(2) = i; this real part is
-    an even integer whose residue modulo 4 is given by an explicit count. Finally the sums with
+    an even integer whose residue modulo 4 is given by an explicit indicator z_1 - z_3. Finally the sums with
     A = 1 and fixed shifts a, b are classified: for odd a in terms of S_{1,1,0}(p) and an oriented
     sum of Legendre symbols, for even a by an explicit finite formula that is bounded and eventually
     constant in p.
@@ -40,8 +40,8 @@ sources:
     note: >-
       The manuscript and this formalization have the same author; the manuscript has not yet been
       posted, and the numbering here is that of its revised draft. Formalized: Lemma 2.1, equation
-      (2.2), Lemma 2.3, Lemma 3.1, Theorem 3.2, Corollaries 3.3 and 3.4, Theorems 4.1 and 4.2 and the
-      two halves of Theorem 4.4 in Bernoulli form, Corollary 4.5 (the quartic split), Proposition 4.6
+      (8) of Section 2, Lemma 2.3, Lemma 3.1, Theorem 3.2, Corollaries 3.3 and 3.4, Theorems 4.1 and 4.2 and the
+      two halves of Theorem 4.4 in Bernoulli form, equation (23) of Corollary 4.5 (the quartic split), Proposition 4.6
       and Theorem 7.1. Not formalized: the class-number identifications through Dirichlet's formula,
       Corollaries 3.5 and 3.6, Corollary 4.3, Proposition 4.7 and Corollary 4.8 (the quartic field and
       its class number), Theorem 5.1 (conductor 8 l p), and Section 6 (the collision theorem and the
@@ -51,7 +51,9 @@ sources:
       is that of Szmidt, Urbanowicz and Zagier together with character orthogonality. The author
       found neither the floor-sum form of these identities nor the quartic split in the sources
       searched (the Dirichlet-type literature above, Berndt's survey, and Chamberland and Dilcher's
-      floor-sum papers); novelty is claimed only relative to that search.
+      floor-sum papers); novelty is claimed only relative to that search, made in 2026. One overlap
+      is known: the case a = b = 0 of Theorem 7.1(2), S_{1,0,0}(p) = 1, is equivalent for prime n = p
+      to the count of k <= n with ceil(k^2/n) odd in Chamberland and Dilcher's alternating-sum paper.
     license: "CC-BY-4.0"
     author_endorsement: "participated"
   - title: "Two term class number formulae of Dirichlet type"
@@ -93,6 +95,16 @@ sources:
     location: "arXiv:2510.04387"
     relationship: "background"
     note: "Recent floor-sum identities tied to class numbers; they evaluate different sums."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "An alternating sum of the floor function of square roots"
+    authors:
+      - "M. Chamberland"
+      - "K. Dilcher"
+    type: "article"
+    location: "J. Integer Seq. 29 (2026), Article 26.2.1; arXiv:2510.26291"
+    relationship: "background"
+    note: "Its count of k <= n with ceil(k^2/n) odd is, for prime n = p, equivalent to S_{1,0,0}(p) = 1, the case a = b = 0 of Theorem 7.1(2)."
     license: "unknown"
     author_endorsement: "n/a"
 
@@ -143,16 +155,22 @@ fidelity:
   divergences: >-
     Floor division is integer division by the positive integer p. eta_p is defined as the Jacobi
     symbol (-8p / x) for odd x and 0 for even x, which is the Kronecker character of discriminant
-    -8p; the paper's formula (2.2) is proved from it by quadratic reciprocity. Bernoulli numbers
+    -8p; the paper's formula (8) is proved from it by quadratic reciprocity. Bernoulli numbers
     B_{1,f}^{(q)} = (1/q) sum_{x=1}^{q} x f(x) are defined for any function f on the natural numbers,
     and the characters theta_{p,psi} are the functions eta_p chi_{-4}^{delta} psi, with chi_{-4}^0
     taken as chi_{-4}^2, the principal character modulo 4. Lemma 3.1 is proved for arbitrary
-    functions with the stated symmetries. In the cases A = 3 and A = 5 the characters are written as
+    functions with the stated symmetries: in part (1) the vanishing of the full sum over [1, 2h],
+    which the paper derives from the character being nonprincipal, is a hypothesis, so that part is
+    immediate from periodicity; in part (2) evenness (f(2h - x) = f(x)) and f(0) = 0 are hypotheses.
+    Lemma 2.1 is stated, as in the paper, for all integers A, B with A + B even. In the cases A = 3 and A = 5 the characters are written as
     explicit functions: eta_p times the indicator of numbers prime to 3 (or 5) for eta_p induced to
     the larger modulus, eta_p chi_{-4} (x/3) for chi_{-24p}, and eta_p (x/5) for chi_{-40p}. No class
     number appears: Theorems 4.1 and 4.2 are proved in Bernoulli form, Theorem 4.4 as its two
-    linear combinations (the difference is Corollary 4.5 and the sum the quadratic half), and the
-    class-number versions follow from Dirichlet's formula, which is quoted. In Proposition 4.6 z_B is
+    linear combinations (the difference is equation (23) of Corollary 4.5 and the sum the quadratic
+    half), and the class-number versions, including equations (24) and (25) of Corollary 4.5, follow
+    from Dirichlet's formula, which is quoted. The assertions of Theorem 4.4 that Theta_p is primitive
+    of order 4 and conductor 40p are not formalized; Re B_{1,Theta_p} does not depend on the choice
+    xi(2) = i, since replacing xi by its conjugate conjugates B_{1,Theta_p}. In Proposition 4.6 z_B is
     defined as whether some 0 <= j <= (p-1)/2 has p dividing B^2 + 40 j, which is equivalent to the
     paper's description through the unique solution j_B. In Theorem 7.1 the odd case is stated with
     S_{1,1,0}(p) - 1 in place of h(-8p), and eventual constancy as the existence of a bound N and a
@@ -174,7 +192,7 @@ alignment:
       lean: "QuadraticFloor.root_count"
       module: "Challenge"
       status: "proved"
-    - source: "Equation (2.2), eta_p = kappa_p (x/p)"
+    - source: "Equation (8) of Section 2, eta_p = kappa_p (x/p)"
       lean: "QuadraticFloor.eta_eq"
       module: "Challenge"
       status: "proved"
@@ -206,7 +224,7 @@ alignment:
       lean: "QuadraticFloor.floorSum_eq_of_sq_modEq"
       module: "Challenge"
       status: "proved"
-    - source: "Corollary 3.4, every square class arises"
+    - source: "Corollary 3.4, every square class arises (every unit residue class has an admissible representative)"
       lean: "QuadraticFloor.exists_admissible"
       module: "Challenge"
       status: "proved"
@@ -224,10 +242,11 @@ alignment:
       lean: "QuadraticFloor.quadratic_half"
       module: "Challenge"
       status: "proved"
-    - source: "Corollary 4.5, Re B_{1,Theta_p} = S_{5,3,0}(p) - S_{5,1,0}(p)"
+    - source: "Corollary 4.5, equation (23), Re B_{1,Theta_p} = S_{5,3,0}(p) - S_{5,1,0}(p)"
       lean: "QuadraticFloor.quartic_split"
       module: "Challenge"
       status: "proved"
+      note: "With quadratic_half, equivalent to Theorem 4.4 in Bernoulli form."
     - source: "Proposition 4.6, the quartic coordinate modulo 4"
       lean: "QuadraticFloor.quartic_mod_four"
       module: "Challenge"

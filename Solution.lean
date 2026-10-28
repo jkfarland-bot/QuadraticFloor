@@ -28,7 +28,7 @@ theorem root_count (hp2 : p ≠ 2) {A B : ℤ} (C : ℤ) (hAB : Even (A + B)) (h
       (1 + 2 * ∑ j ∈ range ((p + 1) / 2), legendreSym p (B ^ 2 - 4 * A * C + 8 * A * j)) :=
   root_count' hp2 C hAB hpA
 
-/-- **Equation (2.2).** `η_p(x) = κ_p(x) (x/p)`. -/
+/-- **Equation (8) of Section 2.** `η_p(x) = κ_p(x) (x/p)`. -/
 theorem eta_eq (hp2 : p ≠ 2) (x : ℕ) : eta p x = kap p x * legendreSym p x :=
   eta_eq' hp2 x
 

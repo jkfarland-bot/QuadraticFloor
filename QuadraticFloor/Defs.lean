@@ -7,7 +7,8 @@ public import Mathlib
 /-!
 # Definitions
 
-Throughout `p` is an odd prime and `A` a positive odd integer.
+Throughout `p` is an odd prime. Lemma 2.1 holds for all integers `A`, `B` with `A + B` even;
+from Lemma 2.3 on, `A` is a positive odd integer.
 
 * `floorSum A B C p = 𝒮_{A,B,C}(p) = ∑_{n=0}^{p-1} (-1)^{⌊(A n² + B n + C)/p⌋}`. Integer division
   by the positive integer `p` is floor division.

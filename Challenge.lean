@@ -12,7 +12,8 @@ library definitions, the objects the results are about, and states each result w
 `Solution.lean` proves every statement below with the same name and type, using the development
 in `QuadraticFloor/`.
 
-Throughout `p` is an odd prime (`[Fact p.Prime]` and `p ≠ 2`) and `A` a positive odd integer.
+Throughout `p` is an odd prime (`[Fact p.Prime]` and `p ≠ 2`). Lemma 2.1 holds for all integers
+`A`, `B` with `A + B` even; from Lemma 2.3 on, `A` is a positive odd integer.
 
 ## Definitions
 
@@ -32,7 +33,7 @@ Throughout `p` is an odd prime (`[Fact p.Prime]` and `p ≠ 2`) and `A` a positi
 
 ## Results (numbering of the paper)
 
-* `root_count` (Lemma 2.1), `eta_eq` (equation (2.2)), `window_form` (Lemma 2.3).
+* `root_count` (Lemma 2.1), `eta_eq` (equation (8), Section 2), `window_form` (Lemma 2.3).
 * `half_sum_zero_of_periodic`, `half_sum_zero_of_even`, `bern_antiperiodic` (Lemma 3.1).
 * `square_class_decomposition` (**Theorem 3.2**), `floorSum_universal` (Corollary 3.3),
   `floorSum_eq_of_sq_modEq`, `exists_admissible` (Corollary 3.4).
@@ -138,7 +139,7 @@ theorem root_count (hp2 : p ≠ 2) {A B : ℤ} (C : ℤ) (hAB : Even (A + B)) (h
     floorSum A B C p = (C.negOnePow : ℤ) *
       (1 + 2 * ∑ j ∈ range ((p + 1) / 2), legendreSym p (B ^ 2 - 4 * A * C + 8 * A * j)) := sorry
 
-/-- **Equation (2.2).** `η_p(x) = κ_p(x) (x/p)`. -/
+/-- **Equation (8) of Section 2.** `η_p(x) = κ_p(x) (x/p)`. -/
 theorem eta_eq (hp2 : p ≠ 2) (x : ℕ) : eta p x = kap p x * legendreSym p x := sorry
 
 /-- **Lemma 2.3 (window form).** For an admissible pair, `𝒮_{A,B,C}(p) - (-1)^C` is twice the sum
@@ -152,12 +153,15 @@ theorem window_form (hp2 : p ≠ 2) {A : ℕ} (hA : Odd A) (hpA : ¬ p ∣ A) {B
 /-! ### Section 3: the square-class decomposition -/
 
 /-- **Lemma 3.1(1).** A function with `f(x + h) = f(x)` and zero sum over `[1, 2h]` has zero sum
-over `[1, h]`. -/
+over `[1, h]`. This is the paper's argument with `q = 2h`: periodicity makes the full sum twice
+the half sum, and for a nonprincipal character modulo `q` the full sum is zero. Here the vanishing
+of the full sum is a hypothesis, so the statement itself is immediate from periodicity. -/
 theorem half_sum_zero_of_periodic (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + h) = f x)
     (hfull : ∑ x ∈ Icc 1 (2 * h), f x = 0) : ∑ x ∈ Icc 1 h, f x = 0 := sorry
 
 /-- **Lemma 3.1(2).** A function with `f(x + h) = -f(x)`, `f(0) = 0` and `f(2h - x) = f(x)` has
-zero sum over `[1, h]`. -/
+zero sum over `[1, h]`. For an even character modulo `q = 2h` with `4 ∣ q`, the last two
+hypotheses are `ϑ(0) = 0` and `ϑ(-x) = ϑ(x)`. -/
 theorem half_sum_zero_of_even (f : ℕ → ℂ) {h : ℕ} (hf : ∀ x, f (x + h) = -f x) (h0 : f 0 = 0)
     (hrefl : ∀ x ≤ 2 * h, f (2 * h - x) = f x) : ∑ x ∈ Icc 1 h, f x = 0 := sorry
 
@@ -166,14 +170,17 @@ theorem bern_antiperiodic (f : ℕ → ℂ) {h : ℕ} (hh : 0 < h) (hf : ∀ x, 
     bern (2 * h) f = -(1 / 2) * ∑ x ∈ Icc 1 h, f x := sorry
 
 /-- **Theorem 3.2 (square-class decomposition).** For an admissible pair `(B, C)`,
-`𝒮_{A,B,C}(p) = (-1)^C - (1/φ(A)) ∑_{ψ mod A} conj(ψ(B))² B_{1,ϑ_{p,ψ}}^{(8Ap)}`. -/
+`𝒮_{A,B,C}(p) = (-1)^C - (1/φ(A)) ∑_{ψ mod A} conj(ψ(B))² B_{1,ϑ_{p,ψ}}^{(8Ap)}`.
+The instance argument `[NeZero A]`, needed to form `DirichletCharacter ℂ A`, is implied by
+`Odd A`. -/
 theorem square_class_decomposition (hp2 : p ≠ 2) {A : ℕ} [NeZero A] (hA : Odd A)
     (hpA : ¬ p ∣ A) {B C : ℤ} (hBC : Admissible A B C) :
     (floorSum A B C p : ℂ) = (C.negOnePow : ℤ) - (1 / (A.totient : ℂ)) *
       ∑ ψ : DirichletCharacter ℂ A, (starRingEnd ℂ (ψ (B : ZMod A))) ^ 2 *
         bern (8 * A * p) (vartheta p ψ) := sorry
 
-/-- **Corollary 3.3.** `𝒮_{A,1,0}(p) = 1 - (1/φ(A)) ∑_ψ B_{1,ϑ_{p,ψ}}^{(8Ap)}`. -/
+/-- **Corollary 3.3.** `𝒮_{A,1,0}(p) = 1 - (1/φ(A)) ∑_ψ B_{1,ϑ_{p,ψ}}^{(8Ap)}`
+(`[NeZero A]` is implied by `Odd A`). -/
 theorem floorSum_universal (hp2 : p ≠ 2) {A : ℕ} [NeZero A] (hA : Odd A) (hpA : ¬ p ∣ A) :
     (floorSum A 1 0 p : ℂ) = 1 - (1 / (A.totient : ℂ)) *
       ∑ ψ : DirichletCharacter ℂ A, bern (8 * A * p) (vartheta p ψ) := sorry
@@ -185,7 +192,8 @@ theorem floorSum_eq_of_sq_modEq (hp2 : p ≠ 2) {A : ℕ} (hA : Odd A) (hpA : ¬
     (hBB : B ^ 2 ≡ B' ^ 2 [ZMOD A]) :
     floorSum A B C p = floorSum A B' C' p ∧ C.negOnePow = C'.negOnePow := sorry
 
-/-- **Corollary 3.4, every square class arises.** -/
+/-- **Corollary 3.4, every square class arises.** Every unit residue class `B₀` modulo `A`, hence
+every square class `B₀² mod A`, has an admissible representative `B ≡ B₀ (mod A)`. -/
 theorem exists_admissible {A : ℕ} (hA : Odd A) {B₀ : ℤ} (hB₀ : Int.gcd B₀ A = 1) :
     ∃ B C : ℤ, Admissible A B C ∧ B ≡ B₀ [ZMOD A] := sorry
 
@@ -212,7 +220,10 @@ theorem quadratic_half (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
       (bern (40 * p) (fun x => (eta p x : ℂ) * (if 5 ∣ x then 0 else 1)) +
         bern (40 * p) (fun x => (eta p x : ℂ) * (jacobiSym x 5 : ℂ))) := sorry
 
-/-- **Corollary 4.5 (the quartic split).** `Re B_{1,Θ_p} = 𝒮_{5,3,0}(p) - 𝒮_{5,1,0}(p)`. -/
+/-- **Corollary 4.5 (the quartic split), equation (23).**
+`Re B_{1,Θ_p} = 𝒮_{5,3,0}(p) - 𝒮_{5,1,0}(p)`. Together with `quadratic_half` this is Theorem 4.4
+in Bernoulli form. The real part does not depend on the choice `ξ(2) = i`: replacing `ξ` by `ξ̄`
+replaces `B_{1,Θ_p}` by its complex conjugate. -/
 theorem quartic_split (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
     ((floorSum 5 3 0 p - floorSum 5 1 0 p : ℤ) : ℝ) = (bern (40 * p) (Theta p)).re := sorry
 
