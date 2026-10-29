@@ -7,6 +7,10 @@ all versions are [doi:10.5281/zenodo.23726772](https://doi.org/10.5281/zenodo.23
 
 Lean 4 / Mathlib formalization of the floor-sum results in J. S. Farland, *Quadratic Floor Sums,
 Class Numbers, and the Trace of a Quartic Bernoulli Number* (manuscript, 2026).
+The companion paper is J. S. Farland, *Quadratic floor sums and the trace of a quartic Bernoulli
+number, formalized in Lean* (preprint, Zenodo, 2026; v1.0
+[doi:10.5281/zenodo.23752229](https://doi.org/10.5281/zenodo.23752229), all versions
+[doi:10.5281/zenodo.23752228](https://doi.org/10.5281/zenodo.23752228)).
 
 For an odd prime `p` and integers `A, B, C` put
 

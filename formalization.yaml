@@ -31,6 +31,19 @@ classification:
   msc2020: ["11A15", "11B68", "11R29", "68V20"]
 
 sources:
+  - title: "Quadratic floor sums and the trace of a quartic Bernoulli number, formalized in Lean"
+    authors:
+      - "Joseph S. Farland"
+    id: "https://doi.org/10.5281/zenodo.23752228"
+    type: "article"
+    location: "Preprint, Zenodo, 2026, https://doi.org/10.5281/zenodo.23752229 (v1.0); all versions https://doi.org/10.5281/zenodo.23752228"
+    relationship: "formalizes"
+    note: >-
+      The companion paper of this formalization, by the same author. It restates the formalized
+      results of the manuscript below with proofs that follow the formal ones, and gives the
+      correspondence between the manuscript, the paper and the Lean names.
+    license: "CC-BY-4.0"
+    author_endorsement: "participated"
   - title: "Quadratic Floor Sums, Class Numbers, and the Trace of a Quartic Bernoulli Number"
     authors:
       - "Joseph S. Farland"

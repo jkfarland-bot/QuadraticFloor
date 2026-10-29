@@ -17,3 +17,14 @@ keywords:
   - Lean 4
   - Mathlib
   - formal verification
+preferred-citation:
+  type: article
+  title: "Quadratic floor sums and the trace of a quartic Bernoulli number, formalized in Lean"
+  authors:
+    - family-names: Farland
+      given-names: Joseph S.
+  year: 2026
+  doi: 10.5281/zenodo.23752228
+  publisher:
+    name: Zenodo
+  notes: "Preprint, version v1.0: doi:10.5281/zenodo.23752229"
