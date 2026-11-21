@@ -22,20 +22,7 @@
     "QuadraticFloor.monic_even_bound",
     "QuadraticFloor.monic_even_eventually_const"
   ],
-  "definition_names": [
-    "QuadraticFloor.floorSum",
-    "QuadraticFloor.Admissible",
-    "QuadraticFloor.eta",
-    "QuadraticFloor.bern",
-    "QuadraticFloor.vartheta",
-    "QuadraticFloor.lg5",
-    "QuadraticFloor.xiFun",
-    "QuadraticFloor.xi",
-    "QuadraticFloor.Theta",
-    "QuadraticFloor.zB",
-    "QuadraticFloor.osum",
-    "QuadraticFloor.kap"
-  ],
+  "definition_names": [],
   "permitted_axioms": [
     "propext",
     "Quot.sound",

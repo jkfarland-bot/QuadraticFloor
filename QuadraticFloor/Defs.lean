@@ -83,7 +83,8 @@ noncomputable def xi : DirichletCharacter ℂ 5 where
     · simp [xiFun, hb]
     have hab : a * b ≠ 0 := by revert a b; decide
     have hlg : lg5 (a * b) % 4 = (lg5 a + lg5 b) % 4 := by revert a b; decide
-    simp only [xiFun, ha, hb, hab, ite_false, ← pow_add]
+    simp only [xiFun, ha, hb, hab, ite_false]
+    rw [← pow_add]
     rw [← Nat.mod_add_div (lg5 (a * b)) 4, ← Nat.mod_add_div (lg5 a + lg5 b) 4, hlg, pow_add,
       pow_add, pow_mul, pow_mul, Complex.I_pow_four, one_pow, one_pow]
   map_nonunit' := by
