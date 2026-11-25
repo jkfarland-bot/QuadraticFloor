@@ -3,7 +3,8 @@
   "upload_type": "software",
   "creators": [
     {
-      "name": "Farland, Joseph S."
+      "name": "Farland, Joseph S.",
+      "orcid": "0009-0007-6809-804X"
     }
   ],
   "license": "Apache-2.0",
@@ -16,13 +17,26 @@
     "class numbers",
     "formal verification"
   ],
-  "description": "Lean 4 / Mathlib formalization of the floor-sum results of J. S. Farland, Quadratic Floor Sums, Class Numbers, and the Trace of a Quartic Bernoulli Number. For an odd prime p, the alternating floor sum S_{A,B,C}(p) of (-1)^floor((An^2+Bn+C)/p) is reduced to a Legendre-symbol sum over an arithmetic progression when A + B is even and p does not divide A, and for odd A and admissible (B, C) it is expressed through first Bernoulli numbers of odd characters modulo 8Ap with weights conj(psi(B))^2 (the square-class decomposition). At A = 5 the difference S_{5,3,0}(p) - S_{5,1,0}(p) is the real part of the first Bernoulli number of a quartic character of conductor 40p, an even integer with an explicit residue modulo 4. The cases A = 1, 3 are proved in Bernoulli form and the monic shifts are classified. No sorry, no native_decide; standard axioms only.",
+  "description": "Lean 4 / Mathlib formalization accompanying J. S. Farland, \"Quadratic floor sums and the trace of a quartic Bernoulli number, formalized in Lean\" (doi:10.5281/zenodo.23752228). For an odd prime p, the alternating floor sum S_{A,B,C}(p) of (-1)^floor((An^2+Bn+C)/p) is reduced to a Legendre-symbol sum over an arithmetic progression when A + B is even and p does not divide A, and for odd A and admissible (B, C) it is expressed through first Bernoulli numbers of odd characters modulo 8Ap with weights conj(psi(B))^2 (the square-class decomposition). At A = 5 the difference S_{5,3,0}(p) - S_{5,1,0}(p) is the real part of the first Bernoulli number of a quartic character of conductor 40p, an even integer with an explicit residue modulo 4. The cases A = 1, 3 are proved in Bernoulli form and the monic shifts are classified. No sorry, no native_decide; standard axioms only.",
   "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23752228",
+      "relation": "isSupplementTo",
+      "scheme": "doi",
+      "resource_type": "publication-preprint"
+    },
     {
       "identifier": "10.5281/zenodo.23673067",
       "relation": "references",
       "scheme": "doi",
       "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/jkfarland-bot/QuadraticFloor",
+      "relation": "isSupplementTo",
+      "scheme": "url",
+      "resource_type": "software"
     }
-  ]
+  ],
+  "notes": "AI assistance: the Lean code in this record was drafted and repaired by Claude (Anthropic), an AI model, from the statements and proofs of the companion paper \"Quadratic floor sums and the trace of a quartic Bernoulli number, formalized in Lean\" (doi:10.5281/zenodo.23752228), and compiled locally with lake. Every proof is checked by the Lean kernel, and Comparator replays the solution against the statement file under the Lean, NanoDa and con-ron kernels. The author, Joseph S. Farland, chose the scope, directed the work, and is responsible for the contents. No external human reviewer has checked the formalization."
 }
